@@ -1,0 +1,28 @@
+
+<Form onSubmit={this.hendleSubmit}>
+    <FormTitle>ENTER YOUR DATA</FormTitle>
+    <Label>
+        Name
+        <Input
+            name="title"
+            value={this.state.title}
+            placeholder="adfdsfdsfddsfsdf"
+            onChange={this.handleChange}
+        />
+    </Label>
+    <Label>
+        number telephon
+        <Input
+            name="description"
+            value={this.state.description}
+            placeholder="adfdsfddf"
+            onChange={this.handleChange}
+        />
+    </Label>
+    <Select name="level" value={this.state.level} onChange={this.handleChange}>
+        <option value={1}>1</option>
+        <option value={2}>2</option>
+        <option value={3}>3</option>
+    </Select>
+    <FormSub type="submit">Add</FormSub>
+</Form>;
