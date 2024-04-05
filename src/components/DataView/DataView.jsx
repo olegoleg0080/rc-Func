@@ -1,11 +1,11 @@
 import { DataBlock, DataDesc, DataLevel, DataTitle, Loading } from "./DataView.styled";
 
-export const DataView = ({ DataSelect }) => {
-    return (DataSelect ? (
+export const DataView = ({ dataSelect }) => {
+    return (dataSelect ? (
         <DataBlock>
-            <DataTitle>{DataSelect.title}</DataTitle>
-            <DataDesc>{DataSelect.description}</DataDesc>
-            <DataLevel>level: {DataSelect.level}</DataLevel>
+            <DataTitle>{dataSelect.title}</DataTitle>
+            <DataDesc>{dataSelect.description}</DataDesc>
+            <DataLevel>level: {dataSelect.level}</DataLevel>
         </DataBlock>
     ) : (
         <DataBlock>

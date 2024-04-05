@@ -38,7 +38,7 @@ const getComp = ({ status }) => {
 
 export const Item = styled.li`
     position: relative;
-    width: calc((100% - 140px) / 3);
+    width: calc((100% - 48px) / 3);
     padding: 10px;
     border: 4px solid ${getColor};
     margin-bottom: 10px;
@@ -80,7 +80,7 @@ export const FormSort = styled.div`
     padding: 24px;
     gap: 20px;
     border: 2px solid #0000ff;
-    max-width: 300px;
+    max-width: 400px;
     margin: 20px auto;
 `;
 
