@@ -10,6 +10,7 @@ import {
     ButtonForDelTrue,
 } from "components/lesson/modal/Modal.styled";
 import { SortForm } from "components/sort/SortForm";
+import { useLocalStorage } from "hooks/useLocalStorage";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -19,6 +20,7 @@ export const App = () => {
     const [selectEl, setSelectEl] = useState("");
     const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [deleteID, setDeleteID] = useState("0");
     const [error, setError] = useState(null);
     const [filters, setFilters] = useState({
         filterText: "",
@@ -30,7 +32,7 @@ export const App = () => {
         return (
             <>
                 <h1>Are you serious?</h1>
-                <ButtonForDelTrue onClick={() => agree()}>
+                <ButtonForDelTrue onClick={() => agree(true)}>
                     True
                 </ButtonForDelTrue>
                 <ButtonForDelFalse onClick={() => noArgee()}>
@@ -39,6 +41,7 @@ export const App = () => {
             </>
         );
     };
+
     //*componentDidMounts
     useEffect(() => {
         setLoading(true);
@@ -71,15 +74,12 @@ export const App = () => {
     }, [list]);
 
     //*Functions
-    const handleAddItem = (item) => {
-        const createElementFatch = async () => {
-            const addToDo = await createToDo(item);
-            setList((list) => [...list, addToDo]);
-        };
+    const handleAddItem = async (item) => {
         try {
             setLoading(true);
             setError(null);
-            createElementFatch();
+            const addToDo = await createToDo(item);
+            setList((list) => [...list, addToDo]);
         } catch (error) {
             toast.error("Add error");
             setError(error);
@@ -87,25 +87,35 @@ export const App = () => {
             setLoading(false);
         }
     };
-    const handleDeleteItem = (item) => {
-        const deleteElementFatch = async (id) => {
-            delToDo(id)
-                .then((e) => {
-                    setList((list) => {
-                        list.filter((item) => item.id !== e.id);
-                    });
-                })
-                .catch((err) => console.log(err));
-        };
+    const handleDeleteConfirm = async () => {
         try {
             setLoading(true);
             setError(null);
-            deleteElementFatch(item);
+            const deletedToDo = await delToDo(deleteID);
+            setList((list) =>
+                list.filter((item) => item.id !== deletedToDo.id)
+            );
+            toast.success("Delete succes");
+            if (selectEl.id === deleteID) {
+                setSelectEl("");
+                localStorage.removeItem("selectEl");
+            }
         } catch (error) {
             toast.error("Del error");
             setError(error);
         } finally {
+            setShowModal(false);
             setLoading(false);
+        }
+    };
+
+    const handleDeleteItem = (value) => {
+        if (typeof value === "string") {
+            console.log(value);
+            setDeleteID(value);
+            setShowModal(true);
+        } else if (value === true) {
+            handleDeleteConfirm();
         }
     };
     const handleSortItems = async (sortFilter) => {
@@ -149,7 +159,7 @@ export const App = () => {
     };
     return (
         <>
-            <FormToDo onAdd={handleAddItem} />
+            <FormToDo  onAdd={handleAddItem} />
             <br />
             {loading && <Loader />}
             <SortForm onSort={handleSortItems} />
@@ -164,12 +174,10 @@ export const App = () => {
 
             {showModal && (
                 <Modal onClose={togleModal}>
-                    <BtnContent
-                        // agree={}
-                        noArgee={togleModal}
-                    />
+                    <BtnContent agree={handleDeleteItem} noArgee={togleModal} />
                 </Modal>
             )}
+            {error && <p>`${error}`</p>}
             <GlobalStyle />
         </>
     );
