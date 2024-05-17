@@ -13,7 +13,7 @@ export const Card = ({
             onClick={(e) => onSelected(e, {title, description, level, id })}
             level={level}
         >
-            <Title>{title}</Title>
+            <Title to={id}>{title}</Title>
             <Text>{description}</Text>
             <Level>{level}</Level>
             {/* <Gmail colorData="#ff0000"/> */}

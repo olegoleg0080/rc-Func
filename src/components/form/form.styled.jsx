@@ -1,5 +1,6 @@
 import { colors } from "constants";
 import { Field, Form } from "formik";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 export const List = styled.ul`
     margin: 0;
@@ -51,7 +52,9 @@ export const FormToDoComponent = styled(Form)`
     flex-direction: column;
     align-items: center;
 `
-export const Title = styled.p`
+export const Title = styled(Link)`
+    color: #000;
+    text-decoration: none;
     font-size: 18px;
     font-style: italic;
     font-weight: 700;

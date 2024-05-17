@@ -1,8 +1,8 @@
 import { FormSort, InputSortForm, Label } from "components/form/form.styled";
 
 export const SortForm = ({ onSort }) => {
-    const onSortChange = (e, key) => {
-        onSort({ [key]: e.target.value });
+    const onSortChange = (e) => {
+        onSort(e.target.name, e.target.value);
     };
     return (
         //     onSubmit={(values) => {
@@ -13,17 +13,17 @@ export const SortForm = ({ onSort }) => {
             <Label>
                 TextSort
                 <InputSortForm
-                    onChange={(e) => onSortChange(e, "filterText")}
-                    name="textSort"
+                    onChange={onSortChange}
+                    name="filterText"
                     type="text"
                 />
             </Label>
             <Label>
                 LevelSort
                 <InputSortForm
-                    onChange={(e) => onSortChange(e, "filterLevel")}
+                    onChange={onSortChange}
                     as="select"
-                    name="levelSort"
+                    name="filterLevel"
                 >
                     <option value="all">all</option>
                     <option value="hard">hard</option>

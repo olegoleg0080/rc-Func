@@ -4,6 +4,10 @@
   "private": true,
   "homepage": "https:///olegoleg0080.github.io/rc-repo/",
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/roboto": "^5.0.13",
+    "@mui/material": "^5.15.16",
     "axios": "^1.6.8",
     "formik": "^2.4.5",
     "modern-normalize": "^2.0.0",
@@ -11,6 +15,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
     "styled-components": "^6.1.8",
